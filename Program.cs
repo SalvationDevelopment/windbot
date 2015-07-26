@@ -12,7 +12,7 @@ namespace WindBot
 
         public static Random Rand;
 
-        public static void Main()
+        public static void Main(string[] args)
         {
 #if !DEBUG
             try
@@ -24,25 +24,22 @@ namespace WindBot
                 Console.Error.WriteLine("Error: " + ex);
             }
 #else
-            Run();
+            Run(args[0], args[1], args[2], int.Parse(args[3]), args[4]);
 #endif
         }
 
-        private static void Run()
+        private static void Run(String username, String deck, String serverIP, int serverPort,String password)
         {
             Rand = new Random();
             CardsManager.Init();
             DecksManager.Init();
 
             // Start two clients and connect them to the same room. Which deck is gonna win?
-            GameClient clientA = new GameClient("Wind", "Horus", "127.0.0.1", 13254, "000");
-            GameClient clientB = new GameClient("Fire", "OldSchool", "127.0.0.1", 13254, "000");
+            GameClient clientA = new GameClient(username, deck, serverIP, serverPort, password);
             clientA.Start();
-            clientB.Start();
-            while (clientA.Connection.IsConnected || clientB.Connection.IsConnected)
+            while (clientA.Connection.IsConnected)
             {
                 clientA.Tick();
-                clientB.Tick();
                 Thread.Sleep(1);
             }
         }
