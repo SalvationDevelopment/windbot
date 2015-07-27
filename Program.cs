@@ -8,7 +8,7 @@ namespace WindBot
 {
     public class Program
     {
-        public const short ProVersion = 0x1335;
+        public const short ProVersion = 0x1334;
 
         public static Random Rand;
 
