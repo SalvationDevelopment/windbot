@@ -10,6 +10,7 @@ namespace WindBot
 {
     public class Program
     {
+
         public const short ProVersion = 0x1338;
 
         public static Random Rand;
@@ -41,10 +42,11 @@ namespace WindBot
         {
             Init("cards.cdb");
 
+
             // Start one client and connect it to the the requested server.
             GameClient clientA = new GameClient(username, deck, serverIP, serverPort, password);
             clientA.Start();
-           
+         
             while (clientA.Connection.IsConnected)
             {
                 clientA.Tick();
