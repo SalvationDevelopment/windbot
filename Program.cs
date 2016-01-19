@@ -13,19 +13,19 @@ namespace WindBot
 
         internal static Random Rand;
         
-        internal static void Main()
+        public static void Main(string[] args)
         {
 #if !DEBUG
             try
             {
-                Run();
+                private static void Run(String username, String deck, String serverIP, int serverPort,String password);
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine("Error: " + ex);
             }
 #else
-            Run();
+           private static void Run(String username, String deck, String serverIP, int serverPort,String password);
 #endif
         }
 
@@ -40,15 +40,13 @@ namespace WindBot
         {
             Init("cards.cdb");
 
-            // Start two clients and connect them to the same server. Which deck is gonna win?
-            GameClient clientA = new GameClient("Wind", "Horus", "127.0.0.1", 7911);
-            GameClient clientB = new GameClient("Fire", "OldSchool", "127.0.0.1", 7911);
+            // Start one client and connect it to the the requested server.
+            GameClient clientA = new GameClient(username, deck, serverIP, serverPort, password);
             clientA.Start();
-            clientB.Start();
+           
             while (clientA.Connection.IsConnected || clientB.Connection.IsConnected)
             {
                 clientA.Tick();
-                clientB.Tick();
                 Thread.Sleep(1);
             }
         }
