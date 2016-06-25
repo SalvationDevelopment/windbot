@@ -10,9 +10,8 @@ namespace WindBot
 {
     public class Program
     {
-
-        public const short ProVersion = 0x1338;
-
+        public static short ProVersion = 0x1338;
+        public static int PlayerNameSize = 20;
         public static Random Rand;
 
         public static void Main(string[] args)
